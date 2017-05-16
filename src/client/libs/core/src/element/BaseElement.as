@@ -28,8 +28,7 @@ package element
 		public function getPos(): Point
 		{
 			var tp : Point = Point.TEMP;
-			tp.x = rect.x;
-			tp.y = rect.y;
+			tp.setTo(rect.x, rect.y);
 			return tp;
 		}
 

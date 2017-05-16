@@ -4,21 +4,32 @@ package game.object
 
 	import element.PlayerElement;
 
+	import laya.ui.Label;
 	import laya.utils.Pool;
 
 	import math.Utils;
 
 	public class Plane extends BaseGameObject 
 	{	
+		public var nameLabel: Label;
+
 		public function Plane()
 		{
 			super();
 			ele = new PlayerElement;
+			nameLabel = new Label;
+			nameLabel.fontSize = 30;
+			nameLabel.align = "center";
+			nameLabel.width = 300;
+			nameLabel.color = "#ffffff";
+			nameLabel.anchorX = 0.5;
+
+			scale(0.5, 0.5);
 		}
 
 		public function setName(name: String):void
 		{
-
+			this.nameLabel.text = name;
 		}
 
 		public function setSkin(skin: int):void
@@ -38,6 +49,9 @@ package game.object
 			super.update();
 			var dir: Number = (ele as PlayerElement).direction;
 			rotation = Utils.dirToAngle(dir);
+
+			nameLabel.x = x; 
+			nameLabel.y = y - 50;
 		}
 
 		override public function sync(info: *):void
@@ -53,6 +67,7 @@ package game.object
 		{
 			super.recover();
 			Pool.recover("Plane", this);
+			nameLabel.parent && nameLabel.parent.removeChild(nameLabel);
 		}
 	}
 }

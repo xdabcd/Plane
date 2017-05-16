@@ -1,8 +1,12 @@
 package game
 {
+	import common.Config;
+
 	import element.PlayerElement;
 
 	import manager.MessageSendManager;
+
+	import math.Utils;
 
 	import serverframe.event.ServerDispatcher;
 	import serverframe.objectPool.PoolManager;
@@ -46,6 +50,9 @@ package game
 		public function addClient(client: Client):void
 		{
 			trace("添加用户:" + client.id);
+			var gw: Number = Config.I.gameWidth - 200;
+			var gh: Number = Config.I.gameHeight - 200;
+			client.player.setPos(Utils.random(-gw / 2, gw / 2), Utils.random(-gh / 2, gh / 2));
 			simulator.addPlayer(client.player);
 			client.dispatcher = dispatcher;
 			clients[client.id] = client;

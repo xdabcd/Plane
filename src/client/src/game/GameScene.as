@@ -26,6 +26,8 @@ package game
 	public class GameScene extends GameUI implements IScene
 	{
 		private var simulator: GameSimulator;
+		private var gameWidth: Number;
+		private var gameHeight: Number;
 		private var playerId: int;
 		private var player: Plane;
 		private var planes: Object = {};
@@ -46,14 +48,14 @@ package game
 			Laya.timer.frameLoop(1, this, update);
 			Laya.stage.on(Event.MOUSE_MOVE, this, mouseMove);
 			curTime = sysTime;
-
-
 		}
 
 		public function init(msg: SMSGEnterRoom):void
 		{
 			Logger.info("playerId", msg.userId);
 			playerId = msg.userId;
+			gameWidth = msg.gameWidth;
+			gameHeight = msg.gameHeight;
 			updatePlanes(msg.userList);
 		}
 
@@ -84,20 +86,29 @@ package game
 
 				}
 			}
+			updateGameBox();
 			curTime = sysTime;
 		}
 
 		private function mouseMove(event: Event):void
 		{		
 			var vec: Point = Point.TEMP;
-			vec.x = planeBox.mouseX - player.x;
-			vec.y = planeBox.mouseY - player.y;
+			vec.setTo(planeBox.mouseX - player.x, planeBox.mouseY - player.y);
 			var dir: Number = Utils.vecToDir(vec);
 			if(dir != direction){
 				direction = dir;
 				player.changeDireciotn(dir);
 				GameCenter.I.changeDirection(dir);
 			}
+		}
+
+		private function updateGameBox():void
+		{
+			if(!player) return;
+			planeBox.x = width / 2 - player.x;
+			planeBox.y = height / 2 - player.y;
+			bg.x = width / 2 - player.x * bg.width / gameWidth;
+			bg.y = height / 2 - player.y * bg.height / gameHeight;
 		}
 
 		private function updatePlanes(userList: Array):void
@@ -119,9 +130,11 @@ package game
 		{
 			var plane: Plane = Pool.getItemByClass("Plane", Plane);
 			plane.init(userInfo.userId);
+			plane.setName(userInfo.name);
 			plane.setSkin(userInfo.skin);
 			planes[userInfo.userId] = plane;
 			planeBox.addChild(plane);
+			planeBox.addChild(plane.nameLabel);
 			simulator.addPlayer(plane.ele as PlayerElement);
 			if(userInfo.userId == playerId) player = plane;
 			return plane;

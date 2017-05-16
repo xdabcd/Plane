@@ -1,5 +1,7 @@
 package manager
 {
+	import common.Config;
+
 	import game.Client;
 	import game.Room;
 
@@ -26,6 +28,8 @@ package manager
 			var msg: SMSGEnterRoom = getMessage(SMSGEnterRoom);
 			msg.userId = client.id;
 			msg.time = room.leftTime;
+			msg.gameWidth = Config.I.gameWidth;
+			msg.gameHeight = Config.I.gameHeight;
 			msg.userList = room.userList;
 			client.sendMessage(msg);
 			trace("房间" + room.id + "当前用户人数:" + msg.userList.length);

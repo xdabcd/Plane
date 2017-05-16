@@ -2,17 +2,15 @@ package sMsg
 {
 	import data.UserInfo;
 
-	public class SMSGEnterRoom extends BaseMessage
+	public class SMSGEnterRoom extends MessageBase
 	{
 		public var userId: int;
-		public var gameTime:Number;
-		public var leftTime:Number;
+		public var time: Number;
 		public var userList: Array;
 
 		private var DES: Array = [
 			["userId", INT],
-			["gameTime", NUMBER],
-			["leftTime", NUMBER],
+			["time", NUMBER],
 			["userList", ARRAY, [CLASS, UserInfo]]
 			];
 

@@ -2,7 +2,7 @@ package sMsg
 {
 	import data.UserInfo;
 
-	public class SMSGUserEnter extends BaseMessage
+	public class SMSGUserEnter extends MessageBase
 	{
 		public var time: Number;
 		public var userInfo: UserInfo;

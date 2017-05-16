@@ -2,7 +2,7 @@ package
 {
 	import laya.utils.Byte;
 
-	public class BaseMessage implements IMessage
+	public class MessageBase implements IMessage
 	{
 		public static const NUMBER: int = 1;
 		public static const INT: int = 2;
@@ -13,7 +13,7 @@ package
 		public static const DES_SIGN:String = "DES";
 		public static const ID_SIGN:String = "MSG_ID";
 
-		public function BaseMessage()
+		public function MessageBase()
 		{
 		}
 
@@ -40,7 +40,7 @@ package
 			for (var i:int = 0; i < des.length; i++) 
 			{
 				temp = des[i];
-				writeObj(this[temp[0]], byte, temp[1], temp[1]);
+				writeObj(this[temp[0]], byte, temp[1], temp[2]);
 			}
 		}
 
@@ -79,9 +79,9 @@ package
 			return rst;
 		}
 
-		private function readClass(byte: Byte, clz: Class): BaseMessage
+		private function readClass(byte: Byte, clz: Class): MessageBase
 		{	
-			var rst: BaseMessage = new clz();
+			var rst: MessageBase = new clz();
 			rst.read(byte);
 			return rst;
 		}
@@ -117,7 +117,7 @@ package
 			}
 		}
 
-		private function writeClass(msg: BaseMessage, byte: Byte, clz: Class):void
+		private function writeClass(msg: MessageBase, byte: Byte, clz: Class):void
 		{
 			msg.write(byte);
 		}

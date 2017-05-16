@@ -1,6 +1,6 @@
 package cMsg
 {
-	public class CMSGUserInfo extends BaseMessage
+	public class CMSGUserInfo extends MessageBase
 	{
 		public var name: String;
 		public var skin: int;

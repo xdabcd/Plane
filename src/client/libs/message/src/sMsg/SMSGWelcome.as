@@ -1,6 +1,6 @@
 package sMsg
 {
-	public class SMSGWelcome extends BaseMessage
+	public class SMSGWelcome extends MessageBase
 	{
 		public var time:Number;
 

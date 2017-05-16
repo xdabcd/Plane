@@ -1,6 +1,6 @@
 package data
 {
-	public class UserInfo extends BaseMessage
+	public class UserInfo extends MessageBase
 	{
 		public var userId: int;	
 		public var name: String;

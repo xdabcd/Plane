@@ -1,6 +1,15 @@
 package
 {
+	import cMsg.CMSGChangeDirection;
+	import cMsg.CMSGUserInfo;
+
 	import laya.utils.Byte;
+
+	import sMsg.SMSGEnterRoom;
+	import sMsg.SMSGUserChange;
+	import sMsg.SMSGUserEnter;
+	import sMsg.SMSGUserLeave;
+	import sMsg.SMSGWelcome;
 
 	public class MessageManager
 	{
@@ -12,6 +21,27 @@ package
 
 		public function MessageManager()
 		{
+		}
+
+		public function init():void
+		{
+			ids = 0;
+			clzArr = [];
+			msgArr = [];
+			var cMsgs: Array = [
+				CMSGUserInfo,
+				CMSGChangeDirection
+				];
+			var sMsgs: Array = [
+				SMSGWelcome,
+				SMSGEnterRoom,
+				SMSGUserEnter,
+				SMSGUserChange,
+				SMSGUserLeave
+				];
+
+			regMessageList(cMsgs);
+			regMessageList(sMsgs);
 		}
 
 		public function readMessage(byte: Byte): IMessage
@@ -52,7 +82,7 @@ package
 
 		private function regMessage(clz: Class):void
 		{
-			clz[BaseMessage.ID_SIGN] = ids;
+			clz[MessageBase.ID_SIGN] = ids;
 			clzArr[ids] = clz;
 			msgArr[ids] = new clz();
 			ids++;

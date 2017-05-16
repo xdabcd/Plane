@@ -14,4 +14,16 @@
 	<natures>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] core-src</name>
+			<type>2</type>
+			<location>/Users/admin/Documents/LayaProj/Plane/src/client/libs/core/src</location>
+		</link>
+		<link>
+			<name>[source path] message-src</name>
+			<type>2</type>
+			<location>/Users/admin/Documents/LayaProj/Plane/src/client/libs/message/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>
